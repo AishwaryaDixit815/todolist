@@ -1,0 +1,41 @@
+<!-- this is our template file which gets various values and posts the results accordingly. This avoids code repetition -->
+
+<%- include("header") -%>
+    <!-- using scriplet tag for jvascript lines inside ejs file : -->
+    <!-- <% if(listTitle == 6 || listTitle == 0){ %> //listTitle is the keyword which will hold the value which is passed
+        <h1 style="color: greenyellow;">It's <%= listTitle %>! Time to rest</h1> //listTitle key placed in the ejs marker, will be replaced by the value being passed
+    <% }else{ %>
+        <h1 style="color: purple;"><%= listTitle %> ToDo List</h1>
+    <% } %> -->
+
+    <div class="box" id="heading">
+        <h1> <%= listTitle %> </h1>
+    </div>
+
+    <div>
+        <!-- <ul>
+            <li>Buy Food</li>
+            <li>Cook Food</li>
+            <li>Eat Food</li>
+            <% for(let x of newItems){ %> //to loop through the recieved array, and add the new items to list
+                <li><%= x %></li>
+            <% } %>
+        </ul> -->
+        <div class="box">
+            <!-- to loop through the recieved array, and add the new items to list -->
+            <% for(let x of newItems){ %>
+                <div class="item">
+                    <input type="checkbox">
+                    <p><%= x %></p>
+                </div>
+            <% } %>
+
+            <form class="item" action="/" method="POST">
+                <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                <button type="submit" name="button" value=<%= listTitle %>>+</button> <!--to determine the type of list we are updating-->
+            </form>
+        </div>
+    </div>
+
+<!-- layout tags for replacing the header and footer files-->
+<%- include("footer") -%>
