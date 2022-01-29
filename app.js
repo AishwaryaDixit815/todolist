@@ -6,6 +6,8 @@ var items = ["Buy Food", "Cook Food", "Eat Food"]; // very initial contents of i
 var work = [];
 
 const app = express();
+const port = process.env.PORT || 3000 ;
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public")); //this line is added to tell express that the static files we are using in our project are placed in the "public" folder. Hence it gets the required file path.
 
@@ -24,7 +26,7 @@ app.post("/", function(req, res){ // after the user posts value through the form
     work.push(item);
     res.redirect("/work");
   }else{
-    items.push(item); //item array now contains the inputted value even if the page is refeshed (untill the code remains same).
+    items.push(item); //item array now contains the inputted value even if the page is refeshed (until the code remains same and server is not closed. any changes made to the code and rerunning the server will delete the changes).
     res.redirect("/"); // we are redirected to the root route, and the list is displayed with the updated array
   }
 })
@@ -37,6 +39,6 @@ app.get("/about", function(req, res){
   res.render("about");
 })
 
-app.listen(3000, function(){
+app.listen(port, function(){
   console.log("Server started on port 3000.");
 });
